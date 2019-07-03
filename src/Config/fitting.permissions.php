@@ -10,6 +10,7 @@ return [
         'view',
         'create',
         'doctrineview',
+        'doctrineviewbyid',
         'reportview'
     ]
 ];
