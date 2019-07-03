@@ -202,6 +202,46 @@
 
     $('#fitlist').DataTable();
 
+    var getDoctrine = (passedId) => {
+      id = passedId || $('#doctrineSpinner').find(":selected").val();
+
+      if (id > 0) {
+          $('button#editDoctrine').prop('disabled', false);
+          $('button#deleteDoctrine').prop('disabled', false);
+
+          $.ajax({
+              headers: function () {
+              },
+              url: "/fitting/getdoctrinebyid/"+id,
+              type: "GET",
+              dataType: 'json',
+              timeout: 10000
+          }).done( function (result) {
+              if (result) {
+                  $('#fitlist').find("tbody").empty();
+                  for (var fitting in result) {
+                      row = "<tr><td><img src='https://image.eveonline.com/Type/" + result[fitting].shipImg + "_32.png' height='24' /></td>";
+                      row = row + "<td>" + result[fitting].shipType + "</td>";
+                      row = row + "<td>" + result[fitting].name + "</td>";
+                      row = row + "<td><button type='button' id='viewfit' class='btn btn-xs btn-success pull-right' data-id='" + result[fitting].id + "' data-toggle='tooltip' data-placement='top' title='View Fitting'>";
+                      row = row + "<span class='fa fa-eye text-white'></span></button></td></tr>";
+                      $('#fitlist').find("tbody").append(row);
+                  }
+              }
+          });
+      } else {
+          $('button#editDoctrine').prop('disabled', true);
+          $('button#deleteDoctrine').prop('disabled', true);
+      }
+    };
+
+    $(document).ready(function() {
+      console.log( "ready!" );
+      var url = document.URL;
+      var id = url.substring(url.lastIndexOf('/') + 1);
+      getDoctrine(id);
+    });
+
     $('#addFitting').on('click', function () {
         $('#fitEditModal').modal('show');
         $('#fitSelection').val('0');
@@ -263,7 +303,7 @@
     });
 
     $('#fitlist').on('click', '#viewfit', function () {
-        $('#highSlots, #midSlots, #lowSlots, #rigs, #cargo, #drones, #subSlots')
+      $('#highSlots, #midSlots, #lowSlots, #rigs, #cargo, #drones, #subSlots')
         .find('tbody')
         .empty();
         $('#fittingId').text($(this).data('id'));
@@ -317,38 +357,7 @@
         }
     });
 
-    $('#doctrineSpinner').change( function () {
-        id = $('#doctrineSpinner').find(":selected").val();
-
-        if (id > 0) {
-            $('button#editDoctrine').prop('disabled', false);
-            $('button#deleteDoctrine').prop('disabled', false);
-
-            $.ajax({
-                headers: function () {
-                },
-                url: "/fitting/getdoctrinebyid/"+id,
-                type: "GET",
-                dataType: 'json',
-                timeout: 10000
-            }).done( function (result) {
-                if (result) {
-                    $('#fitlist').find("tbody").empty();
-                    for (var fitting in result) {
-                        row = "<tr><td><img src='https://image.eveonline.com/Type/" + result[fitting].shipImg + "_32.png' height='24' /></td>";
-                        row = row + "<td>" + result[fitting].shipType + "</td>";
-                        row = row + "<td>" + result[fitting].name + "</td>";
-                        row = row + "<td><button type='button' id='viewfit' class='btn btn-xs btn-success pull-right' data-id='" + result[fitting].id + "' data-toggle='tooltip' data-placement='top' title='View Fitting'>";
-                        row = row + "<span class='fa fa-eye text-white'></span></button></td></tr>";
-                        $('#fitlist').find("tbody").append(row);
-                    }
-                }
-            });
-        } else {
-            $('button#editDoctrine').prop('disabled', true);
-            $('button#deleteDoctrine').prop('disabled', true);
-        }
-    });
+    $('#doctrineSpinner').change(getDoctrine);
 
 
     function fillSkills (result) {
@@ -516,4 +525,3 @@
     });
 </script>
 @endpush
-

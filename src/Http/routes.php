@@ -53,6 +53,11 @@ Route::group([
             'uses' => 'FittingController@getDoctrineView',
             'middleware' => 'bouncer:fitting.doctrineview'
         ]);
+        Route::get('/doctrine/{id}', [
+          'as'   => 'fitting.doctrineview',
+          'uses' => 'FittingController@getDoctrineView',
+          'middleware' => 'bouncer:fitting.doctrineview'
+        ]);
         Route::get('/fittinglist', [
             'as'   => 'fitting.fitlist',
             'uses' => 'FittingController@getFittingList',
