@@ -204,6 +204,11 @@
 
     var getDoctrine = (passedId) => {
       id = passedId || $('#doctrineSpinner').find(":selected").val();
+      id = parseInt(id);
+
+      if (isNaN(id)) {
+        return;
+      }
 
       if (id > 0) {
           $('button#editDoctrine').prop('disabled', false);
@@ -239,6 +244,7 @@
       console.log( "ready!" );
       var url = document.URL;
       var id = url.substring(url.lastIndexOf('/') + 1);
+
       getDoctrine(id);
     });
 
