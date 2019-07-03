@@ -230,7 +230,7 @@ class FittingController extends Controller implements CalculateConstants
         return view('fitting::fitting', compact('fitlist', 'corps'));
     }
 
-    public function getDoctrineView($id)
+    public function getDoctrineView()
     {
         $doctrine_list = $this->getDoctrineList();
 
