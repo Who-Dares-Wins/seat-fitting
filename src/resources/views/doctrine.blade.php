@@ -363,8 +363,9 @@
         }
     });
 
-    $('#doctrineSpinner').change(getDoctrine);
-
+    $('#doctrineSpinner').change(() => {
+      getDoctrine();
+    });
 
     function fillSkills (result) {
 
