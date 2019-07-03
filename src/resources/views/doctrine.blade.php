@@ -35,7 +35,7 @@
           </div>
         </div>
         <br>
-        <p><a href="/fitting/doctrine/{{ $doctrine['id'] }}">Direct link to doctrine</a></p>
+        <p><a id="directLink" href="/fitting/doctrine/{{ $doctrine['id'] }}">Direct link to doctrine</a></p>
         <hr>
         <table id='fitlist' class="table table-hover" style="vertical-align: top">
             <thead>
@@ -234,6 +234,7 @@
                       row = row + "<span class='fa fa-eye text-white'></span></button></td></tr>";
                       $('#fitlist').find("tbody").append(row);
                   }
+                  $("#directLink").attr("href", `/fitting/doctrine/${result[fitting].id}`)
               }
           });
       } else {
