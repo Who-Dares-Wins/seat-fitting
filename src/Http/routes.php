@@ -2,6 +2,18 @@
 
 Route::group([
     'namespace' => 'Denngarr\Seat\Fitting\Http\Controllers',
+    'prefix' => 'api',
+    'middleware' => 'api.auth'
+], function() {
+    Route::group(['prefix' => 'v2'], function () {
+        Route::group(['prefix' => 'fitting'], function () {
+                Route::get('/runReport/{corpid}/{doctrineid}', 'FittingController@runReport');
+        });
+    });
+});
+
+Route::group([
+    'namespace' => 'Denngarr\Seat\Fitting\Http\Controllers',
     'prefix' => 'fitting'
 ], function () {
     Route::group([
