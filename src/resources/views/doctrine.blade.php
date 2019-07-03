@@ -23,7 +23,6 @@
               <option value="{{ $doctrine['id'] }}">{{ $doctrine['name'] }}</option>
               @endforeach
           </select>
-          <p><a href="/fitting/doctrine/{{ $doctrine['id'] }}">Direct link to doctrine</a></p>
           <div class="input-group-btn">
               @if ((auth()->user()->has('fitting.create', false)) && (!empty($doctrine_list)))
               <button type="button" id="editDoctrine" class="btn btn-warning" disabled="disabled" data-id="" data-toggle="modal" data-target="#addDoctrine" data-toggle="tooltip" data-placement="top" title="Edit Doctrine" inactive>
@@ -35,6 +34,8 @@
               @endif
           </div>
         </div>
+        <br>
+        <p><a href="/fitting/doctrine/{{ $doctrine['id'] }}">Direct link to doctrine</a></p>
         <hr>
         <table id='fitlist' class="table table-hover" style="vertical-align: top">
             <thead>
