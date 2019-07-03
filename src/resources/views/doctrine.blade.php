@@ -234,7 +234,7 @@
                       row = row + "<span class='fa fa-eye text-white'></span></button></td></tr>";
                       $('#fitlist').find("tbody").append(row);
                   }
-                  $("#directLink").attr("href", `/fitting/doctrine/${result[fitting].id}`)
+                  $("#directLink").attr("href", `/fitting/doctrine/${id}`)
               }
           });
       } else {
